@@ -1,4 +1,4 @@
-let file = "https://raw.githubusercontent.com/fingerboy2019/hiker/Ju/SrcJu.js";
+let file = "https://raw.githubusercontent.com/fingerboy2019/hiker/main/Ju/SrcJu.js";
 let relyfile = "";
 if(fileExist('hiker://files/libs/' + md5(file) + '.js')){
   relyfile = file;
