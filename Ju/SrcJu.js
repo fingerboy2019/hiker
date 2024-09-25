@@ -52,24 +52,6 @@ function yiji() {
     转换 = 转换 || {};
     let d = [];
     if(MY_PAGE==1){
-        if(getMyVar('SrcJu_versionCheck', '0') == '0'){
-            let programversion = $.require("config").version || 0;
-            if(programversion<14){
-                confirm({
-                    title: "温馨提示",
-                    content: "发现小程序新版本",
-                    confirm: $.toString(() => {
-                        return "海阔视界首页频道规则【聚阅√】￥home_rule_url￥http://hiker.nokia.press/hikerule/rulelist.json?id=6337"
-                    }),
-                    cancel: $.toString(() => {
-                        return "toast://不升级小程序，则功能不全或有异常"
-                    })
-                });
-            }
-            Version();
-            downloadicon();
-        }
-        
         d.push({
             title: "管理",
             url: $("hiker://empty#noRecordHistory##noHistory#").rule(() => {
