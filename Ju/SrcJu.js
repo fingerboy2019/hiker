@@ -52,6 +52,12 @@ function yiji() {
     转换 = 转换 || {};
     let d = [];
     if(MY_PAGE==1){
+        if(getMyVar('SrcJu_versionCheck', '0') == '0'){
+            let programversion = $.require("config").version || 0;
+            Version();
+            downloadicon();
+        }
+        
         d.push({
             title: "管理",
             url: $("hiker://empty#noRecordHistory##noHistory#").rule(() => {
@@ -277,7 +283,7 @@ function erji() {
     clearMyVar('二级加载扩展列表');
     let isload;//是否正确加载
     let sauthor;
-    let detailsfile = "hiker://files/fingerboy/_cache/SrcJu_details.json";
+    let detailsfile = "hiker://files/_cache/SrcJu_details.json";
     let erjidetails = storage0.getMyVar('二级详情临时对象') || {};//二级海报等详情临时保存
     erjidetails.name = MY_PARAMS.name || erjidetails.name || "";
     let name = erjidetails.name.replace(/‘|’|“|”|<[^>]+>|全集|国语|粤语/g,"").trim();
@@ -495,9 +501,9 @@ function erji() {
                 let url = input.split("##")[1];
                 let 公共 = {};
                 try{
-                    公共 = $.require('jiekou'+(/聚阅/.test(参数.规则名)?'':'?rule=聚阅√')).公共(参数.标识);
+                    公共 = $.require('jiekou'+(/聚色/.test(参数.规则名)?'':'?rule=聚色√')).公共(参数.标识);
                 }catch(e){
-                    toast('未找到聚阅规则子页面');
+                    toast('未找到聚色规则子页面');
                 }
                 eval("let 解析2 = " + 解析);
                 let 标识 = 参数.标识;
@@ -1184,7 +1190,7 @@ function sousuo() {
 }
 //搜索接口
 function search(keyword, mode, sdata, group, type) {
-    //mode:sousuo(聚阅聚合)、sousuotest(接口测试)、erji(二级换源)、sousuopage(嗅觉新搜索页)、jusousuo(视界聚合)
+    //mode:sousuo(聚色聚合)、sousuotest(接口测试)、erji(二级换源)、sousuopage(嗅觉新搜索页)、jusousuo(视界聚合)
     let updateItemid = mode=="sousuo" ?  "sousuoloading" : mode=="sousuopage"?"sousuoloading"+getMyVar('SrcJu_sousuoType',type||''):"Julistloading";
     if((mode=="sousuo") && getMyVar('SrcJu_searching')=="1"){
         if(MY_PAGE==1){
@@ -1578,7 +1584,7 @@ function newsousuopage(keyword,searchtype,relyfile) {
     addListener('onRefresh', $.toString(() => {
         clearMyVar('SrcJu_sousuoName');
     }));
-    setPageTitle("搜索|聚阅√");
+    setPageTitle("搜索|聚色√");
     if(relyfile){
         if(!getMyVar('SrcJu_rely') && config.依赖){
             putMyVar('SrcJu_rely',config.依赖);
