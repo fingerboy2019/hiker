@@ -54,7 +54,7 @@ function yiji() {
     if(MY_PAGE==1){
         if(getMyVar('SrcJu_versionCheck', '0') == '0'){
             let programversion = $.require("config").version || 0;
-            Version();
+            //Version();
             downloadicon();
         }
         
