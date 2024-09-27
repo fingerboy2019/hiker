@@ -27,7 +27,7 @@ function SRCSet() {
     d.push({
         title: '增加',
         url: $('hiker://empty#noRecordHistory##noHistory#').rule((sourcefile) => {
-            setPageTitle('增加 | 聚阅接口');
+            setPageTitle('增加 | 聚色接口');
             require(config.依赖.match(/http(s)?:\/\/.*\//)[0] + 'SrcJuSet.js');
             jiekouapi(sourcefile);
         }, sourcefile),
@@ -915,7 +915,7 @@ function JYimport(input,ruleTitle) {
     try {
         input = input.replace("云口令：","");
         let inputname = input.split('￥')[0];
-        if (inputname == "聚阅接口") {
+        if (inputname == "聚色接口") {
             showLoading("正在导入，请稍后...");
             let parseurl = aesDecode('SrcJu', input.split('￥')[1]);
             //xlog(parseurl);
@@ -967,7 +967,7 @@ function JYimport(input,ruleTitle) {
                 toast("合计" +datalist2.length + "个，导入" + num + "个，有" + datalist3.length + "个需手工确认");
                 storage0.putVar('importConfirm', datalist3);
                 ruleTitle = ruleTitle || MY_RULE.title;
-                return "hiker://page/importConfirm?rule=" + ruleTitle;//聚阅√测
+                return "hiker://page/importConfirm?rule=" + ruleTitle;//聚色√测
             }
         } else {
             return "toast://非法口令";
@@ -980,7 +980,7 @@ function JYimport(input,ruleTitle) {
 }
 
 function importConfirm(ruleTitle) {
-    ruleTitle = ruleTitle || "聚阅√";
+    ruleTitle = ruleTitle || "聚色√";
     addListener("onClose", $.toString(() => {
         clearMyVar('SrcJu_searchMark');
         clearVar('importConfirm');
@@ -1097,7 +1097,7 @@ function SRCSet() {
     d.push({
         title: '增加',
         url: $('hiker://empty#noRecordHistory##noHistory#').rule((sourcefile) => {
-            setPageTitle('增加 | 聚阅接口');
+            setPageTitle('增加 | 聚色接口');
             require(config.依赖.match(/http(s)?:\/\/.*\//)[0] + 'SrcJuSet.js');
             jiekouapi(sourcefile);
         }, sourcefile),
@@ -1332,9 +1332,9 @@ function SRCSet() {
     });
     d.push({
         title: '导入',
-        url: $(["聚阅口令","文件导入"], 2 , "选择导入方式").select(() => {
-            if(input=="聚阅口令"){
-                return $("", "聚阅分享口令").input(() => {
+        url: $(["聚色口令","文件导入"], 2 , "选择导入方式").select(() => {
+            if(input=="聚色口令"){
+                return $("", "聚色分享口令").input(() => {
                     require(config.依赖.match(/http(s)?:\/\/.*\//)[0] + 'SrcJuSet.js');
                     return JYimport(input);
                 })
@@ -1342,14 +1342,14 @@ function SRCSet() {
                 return `fileSelect://`+$.toString(()=>{
                     if(/JYshare_/.test(input) && input.endsWith('txt')){
                         require(config.依赖.match(/http(s)?:\/\/.*\//)[0] + 'SrcJuSet.js');
-                        input = '聚阅接口￥' + aesEncode('SrcJu', input) + '￥文件导入';
+                        input = '聚色接口￥' + aesEncode('SrcJu', input) + '￥文件导入';
                         return JYimport(input);
                     }else if(/JYimport_/.test(input) && input.endsWith('hiker')){
                         require(config.依赖.match(/http(s)?:\/\/.*\//)[0] + 'SrcJuSet.js');
                         let content = fetch('file://'+input);
                         return JYimport(content);
                     }else{
-                        return "toast://请选择正确的聚阅接口分享文件"
+                        return "toast://请选择正确的聚色接口分享文件"
                     }
                 })
             }
@@ -1375,7 +1375,7 @@ function SRCSet() {
     });
     d.push({
         title: '分享',
-        url: yxdatalist.length == 0 ? "toast://有效聚阅接口为0，无法分享" : $().b64().lazyRule(() => {
+        url: yxdatalist.length == 0 ? "toast://有效聚色接口为0，无法分享" : $().b64().lazyRule(() => {
             let sharelist;
             let duoselect = storage0.getMyVar('SrcJu_duoselect')?storage0.getMyVar('SrcJu_duoselect'):[];
             if(duoselect.length>0){
@@ -1400,7 +1400,7 @@ function SRCSet() {
                     }
                 }else if(input=='云口令文件'){
                     let sharetxt = aesEncode('SrcJu', JSON.stringify(sharelist));
-                    let code = '聚阅接口￥' + sharetxt + '￥云口令文件';
+                    let code = '聚色接口￥' + sharetxt + '￥云口令文件';
                     let sharefile = 'hiker://files/_cache/JYimport_'+sharelist.length+'_'+$.dateFormat(new Date(),"HHmmss")+'.hiker';
                     writeFile(sharefile, '云口令：'+code+`@import=js:$.require("hiker://page/import?rule=`+MY_RULE.title+`");`);
                     if(fileExist(sharefile)){
@@ -1415,10 +1415,10 @@ function SRCSet() {
                     if (/^http|^云/.test(pasteurl) && pasteurl.includes('/')) {
                         pasteurl = pasteurl.replace('云6oooole', 'https://pasteme.tyrantg.com').replace('云5oooole', 'https://cmd.im').replace('云7oooole', 'https://note.ms').replace('云9oooole', 'https://txtpbbd.cn').replace('云10oooole', 'https://hassdtebin.com');   
                         log('剪贴板地址>'+pasteurl);
-                        let code = '聚阅接口￥' + aesEncode('SrcJu', pasteurl) + '￥共' + sharelist.length + '条('+input+')';
+                        let code = '聚色接口￥' + aesEncode('SrcJu', pasteurl) + '￥共' + sharelist.length + '条('+input+')';
                         copy('云口令：'+code+`@import=js:$.require("hiker://page/import?rule=`+MY_RULE.title+`");`);
                         refreshPage(false);
-                        return "toast://聚阅分享口令已生成";
+                        return "toast://聚色分享口令已生成";
                     } else {
                         return "toast://分享失败，剪粘板或网络异常>"+pasteurl;
                     }
@@ -1618,7 +1618,7 @@ function SRCSet() {
                     if (/^http|^云/.test(pasteurl) && pasteurl.includes('/')) {
                         pasteurl = pasteurl.replace('云6oooole', 'https://pasteme.tyrantg.com').replace('云5oooole', 'https://cmd.im').replace('云7oooole', 'https://note.ms').replace('云9oooole', 'https://txtpbbd.cn').replace('云10oooole', 'https://hassdtebin.com');   
                         log('剪贴板地址>'+pasteurl);
-                        let code = '聚阅接口￥' + aesEncode('SrcJu', pasteurl) + '￥' + data.name;
+                        let code = '聚色接口￥' + aesEncode('SrcJu', pasteurl) + '￥' + data.name;
                         copy('云口令：'+code+`@import=js:$.require("hiker://page/import?rule=`+MY_RULE.title+`");`);
                         return "toast://(单个)分享口令已生成";
                     } else {
@@ -1626,7 +1626,7 @@ function SRCSet() {
                     }
                 } else if (input == "编辑") {
                     return $('hiker://empty#noRecordHistory##noHistory#').rule((sourcefile, data) => {
-                        setPageTitle('编辑 | 聚阅接口');
+                        setPageTitle('编辑 | 聚色接口');
                         require(config.依赖.match(/http(s)?:\/\/.*\//)[0] + 'SrcJuSet.js');
                         jiekouapi(sourcefile, JSON.parse(base64Decode(data)));
                     }, sourcefile, base64Encode(JSON.stringify(data)))
@@ -1985,7 +1985,7 @@ function JYimport(input,ruleTitle) {
     try {
         input = input.replace("云口令：","");
         let inputname = input.split('￥')[0];
-        if (inputname == "聚阅接口") {
+        if (inputname == "聚色接口") {
             showLoading("正在导入，请稍后...");
             let parseurl = aesDecode('SrcJu', input.split('￥')[1]);
             //xlog(parseurl);
@@ -2037,7 +2037,7 @@ function JYimport(input,ruleTitle) {
                 toast("合计" +datalist2.length + "个，导入" + num + "个，有" + datalist3.length + "个需手工确认");
                 storage0.putVar('importConfirm', datalist3);
                 ruleTitle = ruleTitle || MY_RULE.title;
-                return "hiker://page/importConfirm?rule=" + ruleTitle;//聚阅√测
+                return "hiker://page/importConfirm?rule=" + ruleTitle;//聚色√测
             }
         } else {
             return "toast://非法口令";
@@ -2050,7 +2050,7 @@ function JYimport(input,ruleTitle) {
 }
 
 function importConfirm(ruleTitle) {
-    ruleTitle = ruleTitle || "聚阅√";
+    ruleTitle = ruleTitle || "聚色√";
     addListener("onClose", $.toString(() => {
         clearMyVar('SrcJu_searchMark');
         clearVar('importConfirm');
