@@ -248,7 +248,7 @@ function yiji() {
         d.push({
             col_type: "blank_block"
         })
-        if(parse['搜索']){
+        if(sourcedata[0].erparse){
             //搜索
             d.push({
                 title: "🔍",
