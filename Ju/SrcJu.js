@@ -248,6 +248,22 @@ function yiji() {
         d.push({
             col_type: "blank_block"
         })
+        if(parse['搜索']){
+            //搜索
+            d.push({
+                title: "🔍",
+                url: $.toString((r) => {
+                    putVar('keyword', input);
+                    return 'hiker://search?rule=' + r + '&s=' + input;
+                }, MY_RULE.title),
+                desc: '搜你想要的...',
+                col_type: "input",
+                extra: {
+                    defaultValue: getVar('keyword', '') || "",
+                }
+            });
+        }
+
         putMyVar(runMode+"_"+sourcename, "1");
     }
     //加载主页内容
