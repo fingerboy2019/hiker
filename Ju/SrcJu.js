@@ -247,9 +247,8 @@ function yiji() {
         })
         d.push({
             col_type: "blank_block"
-        })
-        log(sourcedata);
-        if(sourcedata[0].erparse && sourcedata[0].erparse['搜索']){
+        });
+        if(sourcedata[0].erparse && eval(sourcedata[0].erparse)['搜索']){
             //搜索
             d.push({
                 title: "🔍",
