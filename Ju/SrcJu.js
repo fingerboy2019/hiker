@@ -248,7 +248,8 @@ function yiji() {
         d.push({
             col_type: "blank_block"
         })
-        if(sourcedata[0].erparse['搜索']){
+        log(sourcedata);
+        if(sourcedata[0].erparse && sourcedata[0].erparse['搜索']){
             //搜索
             d.push({
                 title: "🔍",
